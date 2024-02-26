@@ -1,0 +1,34 @@
+.tabs {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: auto;
+    padding: 0;
+    border-bottom:  1px solid #ccc;
+    margin-bottom: 20px;
+  }
+  
+  .tab {
+    font-size: 18px;
+    cursor: pointer;
+    margin: 0;
+    padding: 10px;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .tab:hover {
+    transition: all 0.2s linear;
+    text-shadow: 3px 3px 3px rgb(172, 156, 156);
+  }
+  
+  .tab_active {
+    font-weight: bold;
+    border: 1px solid #ccc;
+    border-bottom: 1px solid white;
+    box-shadow: 1px 6px 8px 2px rgba(255, 255, 255, 1);
+    transition: all 0.2s linear;
+  }
+  
