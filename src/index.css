@@ -7,6 +7,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
+  background-image: url(./images/background.png);
+  background-size: 20%;
+	background-attachment: fixed;
 }
 
 code {
