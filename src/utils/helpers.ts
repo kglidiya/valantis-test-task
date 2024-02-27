@@ -11,7 +11,7 @@ const getTimeStapm = () => {
 };
 
 export const auth = () => {
-  return Md5.hashStr(`${process.env.REACT_APP_PASSWORD}_` + getTimeStapm());
+  return Md5.hashStr(`Valantis_` + getTimeStapm());
 };
 
 export const removeDuplcates = (arr: any) => {
