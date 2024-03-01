@@ -1,31 +1,35 @@
 import styles from "./Input.module.css";
 import CloseIcon from "../icons/closeIcon/CloseIcon";
+import { UseFormRegister, UseFormSetValue } from "react-hook-form";
+import { ChangeEventHandler } from "react";
+import { IFieldVales } from "../../utils/types";
 
 interface IInput {
-  type: string;
-  placeholder?: string;
-  name: string;
-  register: any;
-  clearButton?: boolean;
-  setValue?: any;
-  onChange?: any;
+
+  placeholder: string;
+  name: "brand" | "product" | "price";
+  register: UseFormRegister<IFieldVales>;
+ 
+  setValue: UseFormSetValue<IFieldVales>
+  onChange?: ChangeEventHandler<HTMLInputElement>;
 }
 const Input = ({
-  type,
+
   placeholder,
   name,
   register,
-  clearButton,
+
   setValue,
   onChange,
 }: IInput) => {
   return (
     <div className={styles.container}>
-      {clearButton && <CloseIcon onClick={() => setValue(name, "")} />}
+     <CloseIcon onClick={() => setValue(name, "")} />
 
       <input
+      
         placeholder={placeholder}
-        type={type}
+        type="text"
         autoComplete="off"
         {...register(name, {
           onChange,

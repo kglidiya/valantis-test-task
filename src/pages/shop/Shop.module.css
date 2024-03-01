@@ -2,7 +2,7 @@
   width: 80%;
   margin: 150px auto;
 } */
-.filters {
+/* .filters {
   position: fixed;
   top: 120px;
   left: 0;
@@ -14,7 +14,7 @@
   z-index: 10;
     box-shadow: 0px 28px 21px 9px white,
   0px 28px 21px 9px white;
-}
+} */
 .products {
   padding-top: 180px;
   display: grid;

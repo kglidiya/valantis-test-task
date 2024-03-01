@@ -1,0 +1,12 @@
+.wrapper {
+    width: calc(100% - 90px);
+    height: 3px;
+    background-color: rgb(194, 194, 194);
+ 
+}
+
+.progress {
+    background-color: rgb(87, 85, 85);
+    height: inherit;
+    transition: all 0.5s linear;
+}

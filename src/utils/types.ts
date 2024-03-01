@@ -10,3 +10,22 @@ export interface IFieldVales {
   product?: string | undefined;
   price?: number | string | undefined;
 }
+
+// export interface IItem {
+//   brand: null | string;
+//   id: string;
+//   price: number;
+//   product: string;
+// }
+
+export interface IStatusIds {
+  isLoading: boolean;
+  data: string[];
+  error: string;
+}
+
+export interface IStatusProduct {
+  isLoading: boolean;
+  data: IProduct[];
+  error: string;
+}
