@@ -1,5 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import axiosRetry from "axios-retry";
+import { IStatusIds, IStatusProduct } from "./types";
 export const BASE_URL = "https://api.valantis.store:41000/";
 
 export const checkResponse = <T>(res: AxiosResponse): Promise<T> => {
@@ -10,21 +11,11 @@ export const checkResponse = <T>(res: AxiosResponse): Promise<T> => {
     return res.data;
   }
 };
-// axiosRetry(axios, { retries: 3 });
-// export const getData = async (body: any, password: string) => {
 
-//   const res = await axios(BASE_URL, {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//       Accept: "application/json",
-//       "X-Auth": password,
-//     },
-//     data: body,
-//   });
-//   return checkResponse<any>(res);
-// };
-export const getData = (body: any, password: string) => {
+export const getData = (
+  body: { [name: string]: string | number },
+  password: string
+) => {
   axiosRetry(axios, {
     retries: 1,
     retryCondition: () => true,
@@ -59,7 +50,8 @@ export const getData = (body: any, password: string) => {
 
 export const handleRequest = async (
   status: any,
-  setStatus: React.Dispatch<React.SetStateAction<any>>,
+  // setStatus: React.Dispatch<React.SetStateAction<IStatusIds|IStatusProduct>>,
+  setStatus: any,
   password: string,
   data?: any
   // params: {} | null = null

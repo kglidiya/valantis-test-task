@@ -1,17 +1,19 @@
 import { fields } from "../../utils/constants";
 import styles from "./Tabs.module.css";
 
+interface ITabsProps {
+  handleTab1: VoidFunction;
+  handleTab2: VoidFunction;
+  handleTab3: VoidFunction;
+  activeTab: string;
+}
+
 export default function Tabs({
   handleTab1,
   handleTab2,
   handleTab3,
-  activeTab
-}: {
-  handleTab1: any;
-  handleTab2: any;
-  handleTab3: any;
-  activeTab: string
-}) {
+  activeTab,
+}: ITabsProps) {
   return (
     <ul className={styles.tabs}>
       <li

@@ -21,5 +21,4 @@ export const images = [
     'https://pawnbat.com/images/store/8689.jpg',
     'https://3d-linker.ru/components/com_jshopping/files/img_products/2539.jpg',
     'https://www.zastavki.com/pictures/originals/2021Finance_Wallpapers___Gems_Pearls_and_jewels_on_a_black_background_154999_.jpg',
-    'http://www.mobilmusic.ru/mfile/d6/11/ad/1611901.jpg',
 ]
