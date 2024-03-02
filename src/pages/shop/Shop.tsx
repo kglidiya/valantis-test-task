@@ -181,19 +181,6 @@ export default function Shop() {
 		limitItemsFilteredToShow,
 	]);
 
-	// console.log(`offsetFilteredToShow   ${offsetItemsFilteredToShow}`);
-	// console.log(`limitItemsFilteredToShow   ${limitItemsFilteredToShow}`);
-	// console.log(
-	// 	`itemsFetchedFiltered.data.length  ${itemsFetchedFiltered.data.length}`
-	// );
-	// console.log(`limitToShow  ${limitItemsAllToShow}`);
-	// console.log(`limitToFetch ${limitToFetch}`);
-	// console.log(`searchResult  ${searchResult.data}`);
-	// console.log(`filteredIds   ${filteredIds.data.length}`);
-	// console.log(`itemsFetchedAll.data.length ${itemsFetchedAll.data.length}`);
-	// console.log(`offsetItemsAllToShow  ${offsetItemsAllToShow}`);
-	// console.log(`limitItemsAllToShow ${limitItemsAllToShow}`);
-	// console.log(`itemsFetchedAll.data ${itemsFetchedAll.data.length}`);
 	// Отоброжение просмотренных товаров в процентах
 	useEffect(() => {
 		if (filteredIds.data.length > 0) {
