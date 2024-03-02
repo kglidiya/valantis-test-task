@@ -16,13 +16,13 @@
 
 .id {
 	font-size: 14px;
-	margin: 10px;
+	margin: 15px;
 }
 
 .product {
 	font-weight: bold;
 	font-size: 16px;
-	margin: 5px 10px;
+	margin: 5px 15px;
 	display: -webkit-box;
 	-webkit-line-clamp: 4;
 	-webkit-box-orient: vertical;
@@ -31,13 +31,13 @@
 
 .price {
 	font-size: 16px;
-	margin: 5px 10px;
+	margin: 5px 15px;
 }
 
 .brand {
 	font-weight: bold;
 	font-size: 14px;
-	margin: 10px;
+	margin: 15px;
 	margin-top: auto;
 }
 
