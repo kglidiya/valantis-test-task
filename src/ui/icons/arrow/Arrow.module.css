@@ -1,42 +1,40 @@
 .arrow_main {
-  width: 32px;
-  height: auto;
-  margin: 0 2rem;
-  cursor: pointer;
-  overflow: visible;
-  margin: 0;
-  /* fill: #000000; */
+	width: 32px;
+	height: auto;
+	margin: 0 2rem;
+	overflow: visible;
+	margin: 0;
 }
 
 .arrow_main:hover .arrow {
-  animation: arrow-anim 1s linear infinite;
+	animation: arrow-anim 1s linear infinite;
 }
 .arrow_main:hover .arrow_fixed {
-  animation: arrow-fixed-anim 1s linear infinite;
+	animation: arrow-fixed-anim 1s linear infinite;
 }
 
 @keyframes arrow-anim {
-  0% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  5% {
-    transform: translateX(-0.1rem);
-  }
-  100% {
-    transform: translateX(1rem);
-    opacity: 0;
-  }
+	0% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+	5% {
+		transform: translateX(-0.1rem);
+	}
+	100% {
+		transform: translateX(1rem);
+		opacity: 0;
+	}
 }
 
 @keyframes arrow-fixed-anim {
-  5% {
-    opacity: 0;
-  }
-  20% {
-    opacity: 0.4;
-  }
-  100% {
-    opacity: 1;
-  }
+	5% {
+		opacity: 0;
+	}
+	20% {
+		opacity: 0.4;
+	}
+	100% {
+		opacity: 1;
+	}
 }

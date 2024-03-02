@@ -1,10 +1,10 @@
-import { ReactNode } from "react";
-import styles from "./OverLay.module.css";
+import { ReactNode } from 'react';
+import styles from './OverLay.module.css';
 
-interface IModalOverLayProps {
-  children: ReactNode;
+interface IOverLayProps {
+	children: ReactNode;
 }
 
-export default function OverLay({ children }: IModalOverLayProps) {
-  return <div className={`${styles.overlay} `}>{children}</div>;
+export default function OverLay({ children }: IOverLayProps) {
+	return <div className={`${styles.overlay} `}>{children}</div>;
 }

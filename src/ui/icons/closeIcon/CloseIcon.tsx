@@ -1,14 +1,12 @@
 import styles from './CloseIcone.module.css';
 
-
-export default function CloseIcon({ onClick }: {onClick: VoidFunction}) {
+export default function CloseIcon({ onClick }: { onClick: VoidFunction }) {
 	return (
 		<div className={styles.icon} onClick={onClick}>
 			<svg
 				width="32px"
 				height="32px"
 				viewBox="0 0 64 64"
-				xmlns="http://www.w3.org/2000/svg"
 				fill="none"
 				stroke="#000000"
 			>
