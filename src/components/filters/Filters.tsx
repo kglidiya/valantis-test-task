@@ -16,7 +16,7 @@ import {
 import handleRequest from '../../utils/api';
 import { actions, fields } from '../../utils/constants';
 import useDebounce from '../../hooks/useDebounce';
-import InputSelect from '../../ui/inputSelect/InputSelect';
+import InputSelect from '../../ui/input-select/InputSelect';
 import Tabs from '../tabs/Tabs';
 import styles from './Filters.module.css';
 import Input from '../../ui/input/Input';
