@@ -21,7 +21,11 @@ const handleRequest = async (
 		setStatus({ ...status, isLoading: true });
 		axiosRetry(axios, {
 			retries: 3,
-			retryCondition: () => true,
+			retryCondition: (error) => {
+				// eslint-disable-next-line no-console
+				console.log(`${error.response?.data}, message: ${error.message}`);
+				return true;
+			},
 		});
 		const res = await axios(BASE_URL, {
 			method: 'POST',
@@ -42,8 +46,6 @@ const handleRequest = async (
 			data: [...status.data, ...res.data.result],
 		});
 	} catch (error) {
-		// eslint-disable-next-line no-console
-		console.log(error);
 		setStatus({
 			...status,
 			isLoading: false,

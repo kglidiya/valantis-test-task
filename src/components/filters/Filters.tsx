@@ -21,7 +21,7 @@ import Tabs from '../tabs/Tabs';
 import styles from './Filters.module.css';
 import Input from '../../ui/input/Input';
 import Arrow from '../../ui/icons/arrow/Arrow';
-import ProgressBarr from '../../ui/progress-bar/ProgressBar';
+import ProgressBar from '../../ui/progress-bar/ProgressBar';
 
 const rotate =
 	'translate(8.500000, 8.500000) scale(-1, 1) translate(-8.500000, -8.500000)';
@@ -45,6 +45,7 @@ interface IFiltersProps {
 	offsetItemsAllToShow: number;
 	setOffsetItemsAllToShow: Dispatch<SetStateAction<number>>;
 	setOffsetItemsAllToFetch: Dispatch<SetStateAction<number>>;
+	offsetItemsAllToFetch: number;
 	setLimitItemsAllToFetch: Dispatch<SetStateAction<number>>;
 	limitItemsFilteredToFetch: number;
 	setLimitItemsFilteredToFetch: Dispatch<SetStateAction<number>>;
@@ -52,6 +53,7 @@ interface IFiltersProps {
 	setOffsetItemsFilteredToShow: Dispatch<SetStateAction<number>>;
 	offsetItemsFilteredToFetch: number;
 	setOffsetItemsFilteredToFetch: Dispatch<SetStateAction<number>>;
+	itemsFetchedAllIsloading: boolean;
 }
 
 export default function Filters({
@@ -68,6 +70,7 @@ export default function Filters({
 	setOffsetItemsAllToShow,
 	offsetItemsAllToShow,
 	setOffsetItemsAllToFetch,
+	offsetItemsAllToFetch,
 	setLimitItemsAllToFetch,
 	limitItemsFilteredToFetch,
 	setLimitItemsFilteredToFetch,
@@ -76,6 +79,7 @@ export default function Filters({
 	setOffsetItemsFilteredToShow,
 	offsetItemsFilteredToFetch,
 	setOffsetItemsFilteredToFetch,
+	itemsFetchedAllIsloading,
 }: IFiltersProps) {
 	const [activeTab, setActiveTab] = useState(fields.PRODUCT);
 	const [isBtnPrevDisabled, setIsBtnPrevDisabled] = useState(true);
@@ -99,16 +103,20 @@ export default function Filters({
 		// Если есть отфильтрованные товары, меняем offset и limit для них,
 		// если отфильтрованных товаров нет, значит поиск не дал
 		// результата и, соотвествено, offset и limit увеличивается для всех товаров
-		if (progress < 100) {
+		if (progress < 100 && !isBtnNextDisabled) {
 			scrollTop();
 			if (itemsFetchedFiltered.data.length > 0) {
-				setOffsetItemsFilteredToFetch((prev) => prev + 100);
-				setLimitItemsFilteredToFetch((prev) => prev + 100);
+				if (offsetItemsFilteredToFetch - offsetItemsFilteredToShow <= 200) {
+					setOffsetItemsFilteredToFetch((prev) => prev + 100);
+					setLimitItemsFilteredToFetch((prev) => prev + 100);
+				}
 				setLimitItemsFilteredToShow((prev) => prev + 50);
 				setOffsetItemsFilteredToShow((prev) => prev + 50);
 			} else {
-				setLimitItemsAllToFetch((prev) => prev + 100);
-				setOffsetItemsAllToFetch((prev) => prev + 100);
+				if (offsetItemsAllToFetch - offsetItemsAllToShow <= 200) {
+					setLimitItemsAllToFetch((prev) => prev + 100);
+					setOffsetItemsAllToFetch((prev) => prev + 100);
+				}
 				setOffsetItemsAllToShow((prev) => prev + 50);
 				setLimitItemsAllToShow((prev) => prev + 50);
 			}
@@ -134,13 +142,26 @@ export default function Filters({
 
 	// Disabling кнопок
 	useEffect(() => {
-		if (offsetItemsAllToShow === 0 && offsetItemsFilteredToShow === 0) {
+		if (
+			(offsetItemsAllToShow === 0 && offsetItemsFilteredToShow === 0) ||
+			progress === 100
+		) {
 			setIsBtnPrevDisabled(true);
 		} else setIsBtnPrevDisabled(false);
-		if (progress === 100) {
+		if (
+			progress === 100 ||
+			itemsFetchedFiltered.isLoading ||
+			itemsFetchedAllIsloading
+		) {
 			setIsBtnNextDisabled(true);
 		} else setIsBtnNextDisabled(false);
-	}, [offsetItemsFilteredToShow, progress, offsetItemsAllToShow]);
+	}, [
+		offsetItemsFilteredToShow,
+		progress,
+		offsetItemsAllToShow,
+		itemsFetchedFiltered.isLoading,
+		itemsFetchedAllIsloading,
+	]);
 
 	// Получение id отфильтрованных товаров
 	const filterItems = (values: IFieldVales) => {
@@ -182,10 +203,12 @@ export default function Filters({
 			setLimitItemsFilteredToShow(50);
 			setIsSearching(false);
 
-			// Инициализация поиска при выборе значений выпаающего списка
-			if (values.price || values.brand || values.brand !== null) {
-				filterItems(values);
-			}
+			// Инициализация поиска при выборе значений выпадающего списка
+			setTimeout(() => {
+				if (values.price || values.brand || values.brand !== null) {
+					filterItems(values);
+				}
+			}, 0);
 		});
 
 		return () => subscription.unsubscribe();
@@ -275,7 +298,7 @@ export default function Filters({
 					<span onClick={getPrevItems}>
 						<Arrow rotate={rotate} disabled={isBtnPrevDisabled} />
 					</span>
-					<ProgressBarr progress={progress} />
+					<ProgressBar progress={progress} />
 					<span onClick={getNextItems}>
 						<Arrow disabled={isBtnNextDisabled} />
 					</span>

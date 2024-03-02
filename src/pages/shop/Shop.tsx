@@ -114,7 +114,7 @@ export default function Shop() {
 
 	// Удаляем дубликаты всех id
 	useEffect(() => {
-		if (itemsAllIds.data.length) {
+		if (itemsAllIds.data.length > 0) {
 			setItemsAllUniqueIds({
 				itemsId: removeDuplcates(itemsAllIds.data as string[]),
 				itemsQty: itemsAllIds.data.length,
@@ -157,10 +157,14 @@ export default function Shop() {
 
 	// Отбираем 50 товаров для показа, удаляем дубликаты
 	useEffect(() => {
-		const uniqueItems = removeDuplcatesById(itemsFetchedAll.data as IProduct[]);
-		setItemsAllToShow(
-			uniqueItems.slice(offsetItemsAllToShow, limitItemsAllToShow)
-		);
+		if (itemsFetchedAll.data.length > 0) {
+			const uniqueItems = removeDuplcatesById(
+				itemsFetchedAll.data as IProduct[]
+			);
+			setItemsAllToShow(
+				uniqueItems.slice(offsetItemsAllToShow, limitItemsAllToShow)
+			);
+		}
 	}, [itemsFetchedAll.data.length, offsetItemsAllToShow, limitItemsAllToShow]);
 
 	// Отбираем 50 отфильтрованных товаров для показа, удаляем дубликаты
@@ -179,14 +183,17 @@ export default function Shop() {
 
 	// console.log(`offsetFilteredToShow   ${offsetItemsFilteredToShow}`);
 	// console.log(`limitItemsFilteredToShow   ${limitItemsFilteredToShow}`);
+	// console.log(
+	// 	`itemsFetchedFiltered.data.length  ${itemsFetchedFiltered.data.length}`
+	// );
 	// console.log(`limitToShow  ${limitItemsAllToShow}`);
-	// console.log(`offsetToShow  ${offsetItemsAllToShow}`);
-	// console.log(`offsetToFetch ${offsetToFetch}`);
 	// console.log(`limitToFetch ${limitToFetch}`);
 	// console.log(`searchResult  ${searchResult.data}`);
 	// console.log(`filteredIds   ${filteredIds.data.length}`);
 	// console.log(`itemsFetchedAll.data.length ${itemsFetchedAll.data.length}`);
-	// console.log(`itemsFetchedAll.data ${itemsFetchedAll.data}`);
+	// console.log(`offsetItemsAllToShow  ${offsetItemsAllToShow}`);
+	// console.log(`limitItemsAllToShow ${limitItemsAllToShow}`);
+	// console.log(`itemsFetchedAll.data ${itemsFetchedAll.data.length}`);
 	// Отоброжение просмотренных товаров в процентах
 	useEffect(() => {
 		if (filteredIds.data.length > 0) {
@@ -197,9 +204,11 @@ export default function Shop() {
 				)
 			);
 		} else
-			setProgress(getProgress(itemsAllIds.data.length, limitItemsAllToShow));
+			setProgress(
+				getProgress(itemsAllUniqueIds.itemsId.length, limitItemsAllToShow)
+			);
 	}, [
-		itemsAllIds.data.length,
+		itemsAllUniqueIds.itemsId.length,
 		limitItemsAllToShow,
 		limitItemsFilteredToShow,
 		filteredIds.data,
@@ -243,6 +252,7 @@ export default function Shop() {
 				offsetItemsAllToShow={offsetItemsAllToShow}
 				setOffsetItemsAllToShow={setOffsetItemsAllToShow}
 				setLimitItemsAllToFetch={setLimitItemsAllToFetch}
+				offsetItemsAllToFetch={offsetItemsAllToFetch}
 				setOffsetItemsAllToFetch={setOffsetItemsAllToFetch}
 				setLimitItemsFilteredToShow={setLimitItemsFilteredToShow}
 				offsetItemsFilteredToShow={offsetItemsFilteredToShow}
@@ -252,6 +262,7 @@ export default function Shop() {
 				setLimitItemsFilteredToFetch={setLimitItemsFilteredToFetch}
 				offsetItemsFilteredToFetch={offsetItemsFilteredToFetch}
 				setOffsetItemsFilteredToFetch={setOffsetItemsFilteredToFetch}
+				itemsFetchedAllIsloading={itemsFetchedAll.isLoading}
 			/>
 
 			<div className={styles.products}>

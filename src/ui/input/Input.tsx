@@ -8,7 +8,6 @@ interface IInput {
 	placeholder: string;
 	name: 'brand' | 'product' | 'price';
 	register: UseFormRegister<IFieldVales>;
-
 	setValue: UseFormSetValue<IFieldVales>;
 	onChange?: ChangeEventHandler<HTMLInputElement>;
 }
