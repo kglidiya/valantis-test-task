@@ -3,11 +3,7 @@
 		"browser": true,
 		"es2021": true
 	},
-	"extends": [
-		"airbnb",
-		"airbnb-typescript",
-		"prettier"
-	],
+	"extends": ["airbnb", "airbnb-typescript", "prettier"],
 	"overrides": [],
 	"parserOptions": {
 		"ecmaVersion": "latest",
@@ -18,7 +14,7 @@
 	"ignorePatterns": ["./build/static/js/main.f6693e59.js"],
 	"rules": {
 		"react/react-in-jsx-scope": 0,
-		"prettier/prettier": ["error"],
+		"prettier/prettier": ["error", { "endOfLine": "auto" }],
 		"react/jsx-wrap-multilines": "off",
 		"react/function-component-definition": "off",
 		"jsx-a11y/click-events-have-key-events": "off",
