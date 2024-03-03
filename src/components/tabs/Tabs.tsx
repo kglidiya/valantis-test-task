@@ -16,13 +16,13 @@ export default function Tabs({
 	activeTab,
 }: ITabsProps) {
 	return (
-		<ul className={styles.tabs}>
+		<ul className={styles.list}>
 			<li
 				onClick={handleTab1}
 				className={
 					activeTab === fields.PRODUCT
-						? `${styles.tab} ${styles.tab_active}`
-						: styles.tab
+						? `${styles.list__item} ${styles.list__item_active}`
+						: styles.list__item
 				}
 			>
 				Поиск по товару
@@ -31,8 +31,8 @@ export default function Tabs({
 				onClick={handleTab2}
 				className={
 					activeTab === fields.BRAND
-						? `${styles.tab} ${styles.tab_active}`
-						: styles.tab
+						? `${styles.list__item} ${styles.list__item_active}`
+						: styles.list__item
 				}
 			>
 				Поиск по брэнду
@@ -41,8 +41,8 @@ export default function Tabs({
 				onClick={handleTab3}
 				className={
 					activeTab === fields.PRICE
-						? `${styles.tab} ${styles.tab_active}`
-						: styles.tab
+						? `${styles.list__item} ${styles.list__item_active}`
+						: styles.list__item
 				}
 			>
 				Поиск по цене

@@ -12,11 +12,11 @@ const Card = memo(({ brand, id, price, product }: IProduct) => {
 				alt="Фото товара"
 				className={styles.image}
 			/>
-			<div>
-				<p className={styles.id}>{`Артикул: ${id}`}</p>
-				<p className={styles.price}>{`${price} руб.`}</p>
-				<p className={styles.product}>{product}</p>
-			</div>
+
+			<p className={styles.id}>{`Артикул: ${id}`}</p>
+			<p className={styles.price}>{`${price} руб.`}</p>
+			<p className={styles.product}>{product}</p>
+
 			{product && <p className={styles.brand}>{brand}</p>}
 		</article>
 	);
