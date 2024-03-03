@@ -1,10 +1,4 @@
-import {
-	ChangeEventHandler,
-	Dispatch,
-	SetStateAction,
-	useEffect,
-	useState,
-} from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import {
 	IFieldVales,
@@ -165,7 +159,6 @@ export default function Filters({
 
 	// Получение id отфильтрованных товаров
 	const filterItems = (values: IFieldVales) => {
-		setIsSearching(true);
 		const params = {} as IFieldVales;
 
 		if (values.brand) {
@@ -180,12 +173,16 @@ export default function Filters({
 		}
 
 		if (Object.keys(params).length !== 0) {
+			setIsSearching(true);
 			handleRequest(filteredIds, setFilteredIds, password, {
 				action: actions.FILTER,
 				params,
 			});
 		}
 	};
+
+	// Отложенный поиск при вводе значений в инпут 'product'
+	const debouncedSearch = useDebounce(filterItems, 1500);
 
 	useEffect(() => {
 		const subscription = watch((values) => {
@@ -203,29 +200,19 @@ export default function Filters({
 			setLimitItemsFilteredToShow(50);
 			setIsSearching(false);
 
-			// Инициализация поиска при выборе значений выпадающего списка
+			// Инициализация поиска
 			setTimeout(() => {
 				if (values.price || values.brand || values.brand !== null) {
 					filterItems(values);
+				}
+				if (values.product) {
+					debouncedSearch(watch());
 				}
 			}, 0);
 		});
 
 		return () => subscription.unsubscribe();
 	}, [watch]);
-
-	// Отложенный поиск при вводе значений в инпут 'product'
-	const debouncedSearch = useDebounce(filterItems, 2000);
-
-	const handleInputProductChange: ChangeEventHandler<HTMLInputElement> = (
-		e
-	) => {
-		if (e.target.value.length < 4) {
-			setIsSearching(false);
-		} else {
-			debouncedSearch(watch());
-		}
-	};
 
 	// Поиск отфильтрованных товаров по id
 	useEffect(() => {
@@ -271,7 +258,6 @@ export default function Filters({
 						name="product"
 						placeholder="Тип товара"
 						register={register}
-						onChange={handleInputProductChange}
 						setValue={setValue}
 					/>
 				)}

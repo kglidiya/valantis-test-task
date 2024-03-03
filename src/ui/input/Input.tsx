@@ -1,5 +1,4 @@
 import { UseFormRegister, UseFormSetValue } from 'react-hook-form';
-import { ChangeEventHandler } from 'react';
 import styles from './Input.module.css';
 import CloseIcon from '../icons/closeIcon/CloseIcon';
 import { IFieldVales } from '../../utils/types';
@@ -9,16 +8,8 @@ interface IInput {
 	name: 'brand' | 'product' | 'price';
 	register: UseFormRegister<IFieldVales>;
 	setValue: UseFormSetValue<IFieldVales>;
-	onChange?: ChangeEventHandler<HTMLInputElement>;
 }
-const Input = ({
-	placeholder,
-	name,
-	register,
-
-	setValue,
-	onChange,
-}: IInput) => {
+const Input = ({ placeholder, name, register, setValue }: IInput) => {
 	return (
 		<div className={styles.container}>
 			<CloseIcon onClick={() => setValue(name, '')} />
@@ -27,9 +18,7 @@ const Input = ({
 				placeholder={placeholder}
 				type="text"
 				autoComplete="off"
-				{...register(name, {
-					onChange,
-				})}
+				{...register(name)}
 				className={styles.input}
 			/>
 		</div>
